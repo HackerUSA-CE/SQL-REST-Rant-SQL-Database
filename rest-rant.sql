@@ -1,8 +1,8 @@
--- Table: public.place
+-- Table: public.places
 
--- DROP TABLE public.place;
+-- DROP TABLE public.places;
 
-CREATE TABLE public.place
+CREATE TABLE public.places
 (
     place_id serial NOT NULL,
     place_name character varying(255) NOT NULL,
@@ -15,10 +15,10 @@ CREATE TABLE public.place
 
 TABLESPACE pg_default;
 
-ALTER TABLE public.place
+ALTER TABLE public.places
     OWNER to postgres;
 	
-CREATE TABLE public.comment
+CREATE TABLE public.comments
 (
     comment_id serial NOT NULL,
     place_id smallint NOT NULL,
@@ -28,12 +28,11 @@ CREATE TABLE public.comment
     author character varying,
     CONSTRAINT comment_pkey PRIMARY KEY (comment_id),
     CONSTRAINT comment_place_id_fkey FOREIGN KEY (place_id)
-        REFERENCES public.place (place_id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT
+        REFERENCES public.places (place_id)
+        ON DELETE CASCADE
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE public.comment
+ALTER TABLE public.comments
     OWNER to postgres;
